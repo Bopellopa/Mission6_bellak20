@@ -1,9 +1,16 @@
 ﻿@{
     ViewData["Title"] = "Joel Hilton Film Collection";
 }
-
+@*main page with picture of Joel and link to podcasts page*@
 <h1>The Joel Hilton Film Collection</h1>
 <div>
    <p>Welcome to Joel Hilton's Film Collection!</p>
 </div>
 <img src="~/img/JoelHiltonHeadshot.jpg" />
+<br />
+
+<div>
+    <a asp-controller="Home" asp-action="MyPodcasts">My Podcasts</a>
+    <br />
+    <a asp-controller="Home" asp-action="MoviesEntry">Enter a Movie</a>
+</div>

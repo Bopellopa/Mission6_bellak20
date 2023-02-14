@@ -23,6 +23,15 @@ namespace Mission6_bellak20.Controllers
             return View();
         }
 
+        public IActionResult MyPodcasts ()
+        {
+            return View("MyPodcasts");
+        }
+
+        public IActionResult MoviesEntry()
+        {
+            return View("MoviesEntry");
+        }
         public IActionResult Privacy()
         {
             return View();
