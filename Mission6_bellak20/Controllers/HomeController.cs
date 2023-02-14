@@ -12,10 +12,11 @@ namespace Mission6_bellak20.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private MoviesEntryContext blahContext { get; set; }
+        public HomeController(ILogger<HomeController> logger, MoviesEntryContext someName)
         {
             _logger = logger;
+            blahContext = someName;
         }
 
         public IActionResult Index()
@@ -37,6 +38,8 @@ namespace Mission6_bellak20.Controllers
         [HttpPost]
         public IActionResult MoviesEntry(MovieResponse mr)
         {
+            blahContext.Add(mr);
+            blahContext.SaveChanges();
             return View("Confirmation", mr);
         }
         public IActionResult Privacy()
