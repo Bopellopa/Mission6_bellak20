@@ -11,8 +11,7 @@ namespace Mission6_bellak20.Models
         [Key]
         [Required]
         public int ApplicationId { get; set; }
-        [Required]
-        public string Category { get; set; }
+        
         [Required]
         public string Title { get; set; }
         [Required]
@@ -26,5 +25,12 @@ namespace Mission6_bellak20.Models
 
         [MaxLength(25)]
         public string Notes { get; set; }
+
+        // Foreign Key Relationship
+        
+        public int CategoryId { get; set; }
+        [Required]
+        public Category Category { get; set; }
+
     }
 }
