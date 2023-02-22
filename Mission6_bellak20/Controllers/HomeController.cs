@@ -11,12 +11,12 @@ namespace Mission6_bellak20.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private MoviesEntryContext blahContext { get; set; }
-        public HomeController(ILogger<HomeController> logger, MoviesEntryContext someName)
+        
+        private MoviesEntryContext daContext { get; set; }
+        public HomeController( MoviesEntryContext someName)
         {
-            _logger = logger;
-            blahContext = someName;
+            
+            daContext = someName;
         }
 
         public IActionResult Index()
@@ -38,19 +38,16 @@ namespace Mission6_bellak20.Controllers
         [HttpPost]
         public IActionResult MoviesEntry(MovieResponse mr)
         {
-            blahContext.Add(mr);
-            blahContext.SaveChanges();
+            daContext.Add(mr);
+            daContext.SaveChanges();
             return View("Confirmation", mr);
         }
-        public IActionResult Privacy()
+        //movie list that pulls from the responses, puts into a list so we can use them
+       [HttpGet]
+        public IActionResult MovieList()
         {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var applications = daContext.Responses.ToList();
+            return View(applications);
         }
     }
 }

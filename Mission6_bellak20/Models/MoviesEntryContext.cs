@@ -15,7 +15,7 @@ namespace Mission6_bellak20.Models
         }
 
         public DbSet<MovieResponse> Responses { get; set; }
-
+        //set entries in the database
         protected override void OnModelCreating(ModelBuilder mb)
         {
             mb.Entity<MovieResponse>().HasData(
