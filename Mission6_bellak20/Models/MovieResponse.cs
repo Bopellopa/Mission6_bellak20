@@ -12,13 +12,13 @@ namespace Mission6_bellak20.Models
         [Required]
         public int ApplicationId { get; set; }
         
-        [Required]
+        [Required(ErrorMessage = "Title is required!")]
         public string Title { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Year is required!")]
         public string Year { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Director is required!")]
         public string Director { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Rating is required!")]
         public string Rating { get; set; }
         public bool Edited { get; set; }
         public string LentTo { get; set; }
@@ -29,7 +29,7 @@ namespace Mission6_bellak20.Models
         // Foreign Key Relationship
         
         public int CategoryId { get; set; }
-        [Required]
+        //[Required(ErrorMessage = "Category is required!")]
         public Category Category { get; set; }
 
     }

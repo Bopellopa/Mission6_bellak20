@@ -10,6 +10,8 @@
 
 <div>
     <form method="post">
+        @*validation makes so error messages show up*@
+        <div asp-validation-summary="All"></div>
         <label asp-for="CategoryId">Category:</label>
         <select asp-for="CategoryId">
             <option>Select a Category</option>

@@ -40,9 +40,20 @@ namespace Mission6_bellak20.Controllers
         [HttpPost]
         public IActionResult MoviesEntry(MovieResponse mr)
         {
-            daContext.Add(mr);
-            daContext.SaveChanges();
-            return View("Confirmation", mr);
+            //make sure its valid
+            if (ModelState.IsValid)
+            {
+                daContext.Add(mr);
+                daContext.SaveChanges();
+                return View("Confirmation", mr);
+
+            }
+            else
+            {
+                ViewBag.Categories = daContext.Categories.ToList();
+                return View(mr);
+            }
+            
         }
         //movie list that pulls from the responses, puts into a list so we can use them, orders by category name alphabetically
        [HttpGet]
@@ -53,17 +64,37 @@ namespace Mission6_bellak20.Controllers
                 .ToList();
             return View(movies);
         }
-        public IActionResult Edit ()
+        [HttpGet]
+        public IActionResult Edit (int applicationid)
         {
             ViewBag.Categories = daContext.Categories.ToList();
 
-            var movie = daContext.Responses.Single();
+            var movie = daContext.Responses.Single(x => x.ApplicationId == applicationid);
 
-            return View("MoviesEntry");
+            return View("MoviesEntry", movie);
         }
-        public IActionResult Delete()
+        [HttpPost]
+        public IActionResult Edit(MovieResponse Blah)
         {
-            return View();
+            daContext.Update(Blah);
+            daContext.SaveChanges();
+
+            return RedirectToAction("MovieList");
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int applicationid)
+        {
+            var movie = daContext.Responses.Single(x => x.ApplicationId == applicationid);
+            return View(movie);
+        }
+        [HttpPost]
+        public IActionResult Delete(MovieResponse mr)
+        {
+            daContext.Responses.Remove(mr);
+            daContext.SaveChanges();
+
+            return RedirectToAction("MovieList");
         }
     }
 }

@@ -4,7 +4,7 @@
 }
 @*using list of item movieresponse*@
 @model List<MovieResponse> 
-@*table that stores each entry made*@
+@*table that stores each entry made, using bootstrap to make it pretty*@
 <table class="table table-bordered table-striped">
 
     <thead class="font-weight-bold">
@@ -34,7 +34,7 @@
                     <td>@x.Notes</td>
 
                     <td><a asp-controller="Home" asp-action="Edit" asp-route-applicationid="@x.ApplicationId">Edit</a></td>
-                    <td><a asp-controller="Home" asp-action="Delete">Delete</a></td>
+                    <td><a asp-controller="Home" asp-action="Delete" asp-route-applicationid="@x.ApplicationId">Delete</a></td>
                 </tr>
             }
     </tbody>
