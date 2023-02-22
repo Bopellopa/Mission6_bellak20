@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Mission6_bellak20.Models;
 using System;
@@ -32,7 +33,8 @@ namespace Mission6_bellak20.Controllers
         [HttpGet]
         public IActionResult MoviesEntry()
         {
-            return View("MoviesEntry");
+            ViewBag.Categories = daContext.Categories.ToList();
+            return View();
         }
 
         [HttpPost]
@@ -42,12 +44,26 @@ namespace Mission6_bellak20.Controllers
             daContext.SaveChanges();
             return View("Confirmation", mr);
         }
-        //movie list that pulls from the responses, puts into a list so we can use them
+        //movie list that pulls from the responses, puts into a list so we can use them, orders by category name alphabetically
        [HttpGet]
         public IActionResult MovieList()
         {
-            var applications = daContext.Responses.ToList();
-            return View(applications);
+            var movies = daContext.Responses.Include(x => x.Category)
+                .OrderBy(x => x.Category)
+                .ToList();
+            return View(movies);
+        }
+        public IActionResult Edit ()
+        {
+            ViewBag.Categories = daContext.Categories.ToList();
+
+            var movie = daContext.Responses.Single();
+
+            return View("MoviesEntry");
+        }
+        public IActionResult Delete()
+        {
+            return View();
         }
     }
 }
